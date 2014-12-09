@@ -30,7 +30,7 @@ ADD ./nginx-site.conf /etc/nginx/sites-available/default
 VOLUME  /www
 
 # TAGINIT 
-ADD ./taginit.sh /usr/local/sbin/taginit.sh
+ADD ./taginit.pl /usr/local/sbin/taginit.pl
 ADD ./download-tag.sh /usr/local/sbin/download-tag.sh
 
 # Fichero de Inicio

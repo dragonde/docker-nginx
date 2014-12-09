@@ -21,7 +21,7 @@ fi
 
 echo -e "\e[36mDescomprimiendo en \e[33m$3\e[0m"
 
-tar zxv -C $3 -f $file
+tar zx -C $3 -f $file
 
 rm -f $file
 

@@ -4,11 +4,11 @@
 
 ### Inicialización del Sistema
   
-  /usr/local/sbin/download-taginit.sh
-  
+  /usr/local/sbin/taginit.pl
+
 ### Arrancando Supervidor 
 
-  echo -e "\e[32mArrancando Supervisord ...\e[0m"
+  echo -e "\n\e[32mArrancando Supervisord ...\e[0m\n"
 
   /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
 
