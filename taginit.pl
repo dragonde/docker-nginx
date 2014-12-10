@@ -33,7 +33,7 @@ if ($TAGINIT=~/^(\w+)\.(\w+)$/) {
 system "cat $chmodfile";
 system "cat $chmodfile | sh";
 
-die "\e[31mERROR INIT NO ENCONTRADO\e[0m\n"
+die "\e[91mERROR INIT NO ENCONTRADO\e[0m\n"
     unless (-s "/usr/local/sbin/init.sh");
 print "\n\e[32mEjecutando init.sh\e[0m\n";
 exec "/usr/local/sbin/init.sh";
