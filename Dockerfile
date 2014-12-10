@@ -31,7 +31,6 @@ VOLUME  /www
 
 # TAGINIT 
 ADD ./taginit.pl /usr/local/sbin/taginit.pl
-ADD ./download-tag.sh /usr/local/sbin/download-tag.sh
 
 # Fichero de Inicio
 ADD ./start.sh /usr/local/sbin/start.sh
