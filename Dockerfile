@@ -20,25 +20,14 @@ RUN apt-get -y install php5-curl php5-gd php5-intl php-pear php5-imagick php5-im
 # Basic Tools
 RUN apt-get -y install supervisor curl pwgen mysql-client ansible
 
-# Supervisor Config
-ADD ./supervisord.conf /etc/supervisor/supervisord.conf
-
-# nginx site conf
-ADD ./nginx-site.conf /etc/nginx/sites-available/default
-
 # Root Directory www
 VOLUME  /www
 
 # TAGINIT 
-ADD ./taginit.pl /usr/local/sbin/taginit.pl
-
-# Fichero de Inicio
-ADD ./start.sh /usr/local/sbin/start.sh
-
-# Permisos sobre sbin
-RUN chmod 500  /usr/local/sbin/*
+ADD ./start.pl /usr/local/sbin/start.pl
+ADD ./storage.sh /usr/local/sbin/storage.sh
 
 # private expose www
 EXPOSE 80
 
-CMD ["/bin/bash", "/usr/local/sbin/start.sh"]
+CMD ["/usr/bin/perl", "/usr/local/sbin/start.pl"]
