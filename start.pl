@@ -10,10 +10,12 @@ print "\e[32mProcesando TAGINIT\e[0m\n\n";
 
 my $TAGINIT=$ENV{'TAGINIT'};
 
-if ($TAGINIT=~/^(\w+)\.(\w+)$/) {
-   my ($segment,$tag)=($1,$2);
+if ($TAGINIT=~/^(\w+)@(\w+):(.+)$/) {
+   my ($tag,$driver,$segment)=($1,$2,$3);
+   die ("\e[91mDRIVER $driver NO ENCONTRADO\n") 
+       unless (-f "/usr/local/sbin/storage-$driver.sh");
    print "\e[36mIndex: \e[33m$segment.$tag\e[0m\n";
-   download_tag ($segment,$tag,"/tmp","index");
+   download_tag ($driver,$segment,$tag,"/tmp","index");
    open (INDEX,"<$index") || die ("\e[91mImposible Abrir $index\n");
    while (my $line=<INDEX>) {
       next if ($line=~/ index\s*$/);
@@ -23,7 +25,7 @@ if ($TAGINIT=~/^(\w+)\.(\w+)$/) {
       my $alias=$2;
       my $dir=$3;
       die ("\e[91mDIRECTORIO INCORRECTO $dir\n") unless (-d $dir);
-      download_tag($segment,$tag,$dir,$alias);
+      download_tag($driver,$segment,$tag,$dir,$alias);
    }
    close (INDEX);
    unlink ($index);
@@ -35,10 +37,10 @@ print "\n\e[32mEjecutando init.sh\e[0m\n";
 exec "/usr/local/sbin/init.sh";
 
 sub download_tag {
-  my ($segment,$tag,$dir,$alias)=@_;
+  my ($driver,$segment,$tag,$dir,$alias)=@_;
   print "\e[36mDescarga \e[35m$segment \e[33m$tag\e[0m\n";
   my $file="/tmp/$tag";
-  system ("storage.sh get $segment $tag $file");
+  system ("storage-$driver.sh get $segment $tag $file");
   if (-s "$file") { 
     my $md5=`md5sum $file | head -c 20`;
     die ("\e91mERROR MD5 en $segment $tag\e[0m") 

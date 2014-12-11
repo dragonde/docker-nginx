@@ -25,7 +25,10 @@ VOLUME  /www
 
 # TAGINIT 
 ADD ./start.pl /usr/local/sbin/start.pl
-ADD ./storage.sh /usr/local/sbin/storage.sh
+
+### Storage Drivers
+ADD ./storage-gs.sh /usr/local/sbin/storage-gs.sh
+ADD ./storage-http.sh /usr/local/sbin/storage-http.sh
 
 # private expose www
 EXPOSE 80
