@@ -28,7 +28,9 @@ ADD ./start.pl /usr/local/sbin/start.pl
 
 ### Storage Drivers
 ADD ./storage-gs.sh /usr/local/sbin/storage-gs.sh
-ADD ./storage-http.sh /usr/local/sbin/storage-http.sh
+ADD ./storage-web.sh /usr/local/sbin/storage-web.sh
+ADD ./storage-file.sh /usr/local/sbin/storage-file.sh
+
 
 # private expose www
 EXPOSE 80

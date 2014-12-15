@@ -4,13 +4,13 @@ use strict;
 
 ### TAGINIT PERL 
 
-my $index='/tmp/index-taginit';
+my $index='/tmp/index';
 
 print "\e[32mProcesando TAGINIT\e[0m\n\n";
 
 my $TAGINIT=$ENV{'TAGINIT'};
 
-if ($TAGINIT=~/^(\w+)@(\w+):(.+)$/) {
+if ($TAGINIT=~/^([0-9a-f]{20})@([a-z]{2,5}):(.+)$/) {
    my ($tag,$driver,$segment)=($1,$2,$3);
    die ("\e[91mDRIVER $driver NO ENCONTRADO\n") 
        unless (-f "/usr/local/sbin/storage-$driver.sh");
@@ -30,6 +30,12 @@ if ($TAGINIT=~/^(\w+)@(\w+):(.+)$/) {
    close (INDEX);
    unlink ($index);
 } 
+
+else {
+ print "\e[31mTAGINIT NO VALIDO: $TAGINIT\e[0m\n";
+
+} 
+ 
 
 die "\e[91mERROR INIT NO ENCONTRADO\e[0m\n"
     unless (-s "/usr/local/sbin/init.sh");
