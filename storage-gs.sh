@@ -4,6 +4,8 @@
 # usage: storage command segment tag file
 # commands: get, put, format
 
+# segment ...@gs:misegmento
+
 if [ $# -lt 4 ]
 then
         echo "Usage : $0 Command Segment Tag File"

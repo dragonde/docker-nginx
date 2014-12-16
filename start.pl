@@ -52,7 +52,7 @@ sub download_tag {
     die ("\e91mERROR MD5 en $segment $tag\e[0m") 
         if ($md5 ne $tag);
   } else {
-    die ("\e91mERROR DESCARGA en $segment/$tag\e[0m");
+    die ("\e[91mERROR DESCARGA en $segment/$tag\e[0m\n");
   }  
   print "\e[36mDescomprimiendo en \e[94m$dir\e[0m\n";
   system ("tar zx -C $dir -f $file");
