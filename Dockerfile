@@ -9,7 +9,7 @@ RUN ln -sf /bin/true /sbin/initctl
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
-RUN apt-get -y upgrade
+#RUN apt-get -y upgrade
 
 # Basic Requirements NGINX PHP
 RUN apt-get -y install nginx php5-fpm php5-mysql php-apc
@@ -26,15 +26,11 @@ VOLUME  /proper
 
 
 # TAGINIT 
-ADD ./start.pl /usr/local/sbin/start.pl
+ADD https://raw.githubusercontent.com/dragonde/masterget/master/masterget /usr/local/sbin/masterget
 
-### Storage Drivers
-ADD ./storage-gs.sh /usr/local/sbin/storage-gs.sh
-ADD ./storage-web.sh /usr/local/sbin/storage-web.sh
-ADD ./storage-file.sh /usr/local/sbin/storage-file.sh
-ADD ./storage-scp.sh /usr/local/sbin/storage-scp.sh
+RUN chmod 700 /usr/local/sbin/masterget
 
 # private expose www
 EXPOSE 80
 
-CMD ["/usr/bin/perl", "/usr/local/sbin/start.pl"]
+CMD ["masterget","-x","init.sh"]
