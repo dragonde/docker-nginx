@@ -22,15 +22,14 @@ RUN apt-get -y install supervisor curl pwgen mysql-client ansible openssh-client
 
 # Root Directory www
 VOLUME  /www
-VOLUME  /proper
+#VOLUME  /proper
 
 
 # TAGINIT 
 ADD https://raw.githubusercontent.com/dragonde/masterget/master/masterget /usr/local/sbin/masterget
-
 RUN chmod 700 /usr/local/sbin/masterget
 
 # private expose www
 EXPOSE 80
 
-CMD ["masterget","-x","init.sh"]
+#CMD ["masterget","-x","init.sh"]
