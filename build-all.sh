@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t=dragonde/nginx-php .
+docker build -t=dragonde/nginx .

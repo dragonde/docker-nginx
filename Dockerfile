@@ -13,11 +13,15 @@ RUN apt-get update
 # Basic Requirements NGINX 
 RUN apt-get -y install nginx 
 
+ADD nginx-site.conf /etc/nginx/sites-enabled/default 
+
 # Basic Tools
 RUN apt-get -y install supervisor 
 
+ADD supervisord.conf /etc/supervisor/supervisord.conf
+
 # Root Directory www
-VOLUME  /www
+VOLUME  /usr/share/nginx/html
 
 # private expose www
 EXPOSE 80
