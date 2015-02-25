@@ -1,0 +1,17 @@
+[Unit]
+Description=docker-register
+After=docker.service
+
+[Service]
+EnvironmentFile=/etc/environment
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill nginx 
+ExecStartPre=-/usr/bin/docker rm nginx
+ExecStartPre=/usr/bin/docker pull quay.io/dragonde/docker-nginx
+ExecStartPre=/usr/bin/docker tag -f quay.io/dragonde/docker-nginx docker-nginx
+ExecStart=/usr/bin/docker run --name nginx -p :80 docker-nginx
+ExecStop=/usr/bin/docker stop nginx
+
+[X-Fleet]
+Global=true
+MachineMetadata=role=node
